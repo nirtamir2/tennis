@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Score from '@/components/Score'
+import NewPlayer from '@/components/NewPlayer'
+import NewMatch from '@/components/NewMatch'
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    }
+      path: '/score',
+      name: 'Score',
+      component: Score
+    }, {
+      path: '/NewMatch',
+      name: 'NewMatch',
+      component: NewMatch
+    }, {
+      path: '/NewPlayer',
+      name: 'NewPlayer',
+      component: NewPlayer
+    },
+
   ]
 })

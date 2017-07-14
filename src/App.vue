@@ -1,54 +1,93 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
+  <div id="app" class="tennis-background">
+    <v-app standalone>
+      <v-navigation-drawer
+        temporary
+        v-model="drawer"
+        :mini-variant.sync="mini"
+        light
+        overflow
+        absolute
+      >
+        <v-list class="pa-0">
+          <v-list-tile avatar tag="div">
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg"/>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>User Name</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon dark @click.native.stop="mini = !mini">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+        <v-list class="pt-0" dense>
+          <v-divider></v-divider>
+          <router-link v-for="item in items"  :to="item.router" tag="div">
+          <v-list-tile :key="item">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          </router-link>
+        </v-list>
+      </v-navigation-drawer>
+      <v-toolbar fixed class="green" dark>
+        <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title>Tennis</v-toolbar-title>
+      </v-toolbar>
+      <main>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </main>
+    </v-app>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import Score from './components/Score.vue'
+  export default {
+    name: 'app',
+    components: {Score},
+    data()
+    {
+      return {
+        scoreData: {
+          leftAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
+          rightAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
+          leftTeam: "Nir Tamir",
+          rightTeam: "Elad Amir",
+          leftScore: "1",
+          rightScore: "1"
+        },
+        drawer: null,
+        items: [
+          {title: 'New Match', icon: 'add', router: 'NewMatch'},
+          {title: 'New Player', icon: 'person_add', router: 'NewPlayer'},
+          {title: 'Score', icon: 'view_day', router: 'Score'},
+          {title: 'Rank', icon: 'view_list', router:'Rank'}
+        ],
+        mini: false,
+        right: null
+      }
+    }
+  };
 </script>
-
-<style>
-body {
-  margin: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
+<style scoped>
+  .tennis-background {
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*min-width: 100%;*/
+    /*min-height: 100%;*/
+    /*background-image: url("../static/Tennis Court Wallpaper Tenniscourtservices-g2bcover.png.png");*/
+  }
 </style>
+
