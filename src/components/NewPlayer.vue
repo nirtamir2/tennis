@@ -29,7 +29,11 @@
     methods: {
       save(){
         if (this.image && this.name) {
-          db.ref('players').push({name: this.name, avatar: this.image});
+          let playerKey = db.ref('players').push({name: this.name, avatar: this.image}).key;
+
+          let newRank = {};
+          newRank['rank/' + playerKey] = {matches: 0, wins: 0, draw: 0, lose: 0, points: 0};
+          db.ref().update(newRank);
 
           this.image = "";
           this.name = "";

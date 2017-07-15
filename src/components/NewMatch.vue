@@ -140,18 +140,17 @@
     },
     methods: {
       save(){
-        if (this.selectedTeam1.length>0 && this.selectedTeam1.length === this.selectedTeam2.length) {
+        if (this.selectedTeam1.length > 0 && this.selectedTeam1.length === this.selectedTeam2.length) {
 
-          const team1 = this.selectedTeam1.reduce(function ( total, current ) {
-            total[ current ] = true;
+          const team1 = this.selectedTeam1.reduce(function (total, current) {
+            total[current] = true;
             return total;
           }, {});
 
-          const team2 = this.selectedTeam2.reduce(function ( total, current ) {
-            total[ current ] = true;
+          const team2 = this.selectedTeam2.reduce(function (total, current) {
+            total[current] = true;
             return total;
           }, {});
-
 
           let match = {
             team1,
@@ -161,13 +160,67 @@
             team2Score: this.team2Score
           };
           db.ref('matches').push(match);
+
+//          update ranks
+          let winningTeam = {};
+          let losingTeam = {};
+          let drawTeam = {};
+          if (this.team1Score > this.team2Score) {
+            winningTeam = team1;
+            losingTeam = team2;
+          }
+          else if (this.team1Score === this.team2Score)
+            drawTeam = {...team1, ...team2};
+          else {
+            winningTeam = team2;
+            losingTeam = team1;
+          }
+
+          //update winning team
+          for (let playerKey of Object.keys(winningTeam)) {
+            let rank = {...this.ranks[playerKey]};
+            rank.wins++;
+            rank.matches++;
+            rank.points += 3;
+
+            let updateRank = {};
+            updateRank['rank/' + playerKey] = rank;
+            db.ref().update(updateRank);
+          }
+
+          //update losing team
+          for (let playerKey of Object.keys(losingTeam)) {
+            let rank = {...this.ranks[playerKey]};
+            rank.lose++;
+            rank.matches++;
+
+            let updateRank = {};
+            updateRank['rank/' + playerKey] = rank;
+            db.ref().update(updateRank);
+          }
+
+
+          //update draw
+          for (let playerKey of Object.keys(drawTeam)) {
+            let rank = {...this.ranks[playerKey]};
+            rank.draw++;
+            rank.matches++;
+            rank.points++;
+
+            let updateRank = {};
+            updateRank['rank/' + playerKey] = rank;
+            db.ref().update(updateRank);
+          }
+
         }
       }
-    },
+    }
+    ,
     firebase: function () {
       return {
-        players: db.ref('players')
+        players: db.ref('players'),
+        ranks: {source: db.ref('rank'), asObject: true}
       };
     }
-  };
+  }
 </script>
