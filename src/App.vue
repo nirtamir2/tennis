@@ -52,21 +52,11 @@
 </template>
 
 <script>
-  import Score from './components/Score.vue'
   export default {
     name: 'app',
-    components: {Score},
     data()
     {
       return {
-        scoreData: {
-          leftAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
-          rightAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
-          leftTeam: "Nir Tamir",
-          rightTeam: "Elad Amir",
-          leftScore: "1",
-          rightScore: "1"
-        },
         drawer: null,
         items: [
           {title: 'New Match', icon: 'add', router: 'NewMatch'},

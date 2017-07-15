@@ -1,36 +1,56 @@
 <template>
-  <v-layout row fluid>
-    <v-flex fluid>
-      <v-avatar>
-        <img style="vertical-align:middle" :src="score.leftAvatar" :alt="score.leftTeam">
-        <h4>{{score.leftTeam}}</h4>
-      </v-avatar>
-    </v-flex>
-    <h4 class="text-xs-center">{{score.leftScore}}:{{score.rightScore}}</h4>
-    <v-flex fluid>
-      <v-avatar class="middle">
-        <h4 class="middle">{{score.rightTeam}}</h4>
-        <img class="middle" :src="score.rightAvatar" :alt="rightTeam">
-      </v-avatar>
-    </v-flex>
-  </v-layout>
+  <div>
+    <template v-for="match in this.matches">
+      <div>
+        <v-layout row fluid>
+          <v-flex v-for="player in team1(match)">
+            <team-player :player="player"></team-player>
+          </v-flex>
+          <h4 class="text-xs-center">{{match.team1Score}}:{{match.team2Score}}</h4>
+          <v-flex v-for="player in team2(match)">
+            <team-player :player="player"></team-player>
+          </v-flex>
+        </v-layout>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>
+  import {db} from './../firebase'
+  import TeamPlayer from './TeamPlayer.vue'
   export default {
-    name: 'hello',
+    name: 'score',
+    components: {TeamPlayer},
+
     data () {
-      return {
-        score: {
-          leftAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
-          rightAvatar: "https://api.adorable.io/avatars/285/3@adorable.io.png",
-          leftTeam: "Nir Tamir",
-          rightTeam: "Elad Amir",
-          leftScore: "1",
-          rightScore: "1"
-        }
+      return {}
+    },
+    firebase: {
+      matches: db.ref('matches'),
+      players: {
+        source: db.ref('players'),
+        asObject: true
       }
-    }
+    },
+    methods: {
+      team1(match){
+        let keys = Object.keys(match.team1);
+        let arr = [];
+        for (let key of keys) {
+          arr.push(this.players[key])
+        }
+        return arr;
+      },
+      team2(match){
+        let keys = Object.keys(match.team2);
+        let arr = [];
+        for (let key of keys) {
+          arr.push(this.players[key])
+        }
+        return arr;
+      }
+    },
   }
   ;
 </script>

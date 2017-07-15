@@ -1,28 +1,5 @@
 <template>
   <v-container fluid>
-    <!--<v-layout row wrap>-->
-    <!--<v-select xs3-->
-    <!--:items="players"-->
-    <!--v-model="selectedTeam1"-->
-    <!--label="team 1"-->
-    <!--autocomplete-->
-    <!--auto-->
-    <!--item-text="name"-->
-    <!--item-value="key"-->
-    <!--return-object-->
-    <!--&gt;</v-select>-->
-    <!--<h4>vs</h4>-->
-    <!--<v-select xs3-->
-    <!--:items="players"-->
-    <!--v-model="selectedTeam2"-->
-    <!--label="team 2"-->
-    <!--autocomplete-->
-    <!--auto-->
-    <!--item-text="name"-->
-    <!--item-value="key"-->
-    <!--return-object-->
-    <!--&gt;</v-select>-->
-    <!--</v-layout>-->
     <v-layout row>
       <v-flex xs12 sm6>
         <v-dialog
