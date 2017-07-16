@@ -43,16 +43,15 @@
           {
             text: 'rank',
             align: 'left',
-            value: 'name'
+            value: 'rank'
           },
-          {text: 'player', value: 'player'},
+          {text: 'player', value: 'player.name'},
           {text: 'matches', value: 'matches'},
           {text: 'wins', value: 'wins'},
           {text: 'draws', value: 'draws'},
           {text: 'loses', value: 'loses'},
           {text: 'points', value: 'points'},
         ],
-        items: []
       }
     },
     methods: {
@@ -72,9 +71,10 @@
           });
         }
 
-        arr.sort((a, b) => (a.points < b.points));
+        arr = arr.sort((a, b) => (b.points - a.points));
+
         let rank = 1;
-        for(let a of arr){
+        for (let a of arr) {
           a["rank"] = rank++;
         }
         return arr;
