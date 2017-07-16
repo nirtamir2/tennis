@@ -29,7 +29,6 @@
         From {{ pageStart }} to {{ pageStop }}
       </template>
     </v-data-table>
-    <v-btn @click.native="log">log</v-btn>
   </v-card>
 </template>
 
@@ -57,10 +56,6 @@
       }
     },
     methods: {
-      log()
-      {
-        console.log(this.getItems());
-      },
       getItems()
       {
         let arr = [];

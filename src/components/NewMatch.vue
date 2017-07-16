@@ -57,7 +57,7 @@
           </template>
           <template slot="item" scope="data">
             <v-list-tile-avatar>
-              <img :src="data.item.image"/>
+              <img :src="data.item.avatar"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
@@ -93,7 +93,7 @@
           </template>
           <template slot="item" scope="data">
             <v-list-tile-avatar>
-              <img :src="data.item.image"/>
+              <img :src="data.item.avatar"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
