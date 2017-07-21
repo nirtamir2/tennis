@@ -15,6 +15,7 @@
       v-bind:headers="headers"
       v-bind:items="this.getItems()"
       v-bind:search="search"
+      hide-actions
     >
       <template slot="items" scope="props">
         <td class="text-xs-left">{{ props.item.rank }}</td>
