@@ -38,8 +38,7 @@
           item-value=".key"
           multiple
           chips
-          max-height="auto"
-          autocomplete
+          max-height="200"
         >
           <template slot="selection" scope="data">
             <v-chip
@@ -74,8 +73,7 @@
           item-value=".key"
           multiple
           chips
-          max-height="auto"
-          autocomplete
+          max-height="200"
         >
           <template slot="selection" scope="data">
             <v-chip
