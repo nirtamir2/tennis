@@ -179,7 +179,7 @@
             let rank = {...this.ranks[playerKey]};
             rank.wins++;
             rank.matches++;
-            rank.points += 3;
+            rank.points ++;
 
             let updateRank = {};
             updateRank['rank/' + playerKey] = rank;
@@ -203,7 +203,7 @@
             let rank = {...this.ranks[playerKey]};
             rank.draw++;
             rank.matches++;
-            rank.points++;
+//            rank.points++;
 
             let updateRank = {};
             updateRank['rank/' + playerKey] = rank;
