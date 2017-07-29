@@ -4,6 +4,7 @@ import Score from '@/components/Score'
 import NewPlayer from '@/components/NewPlayer'
 import NewMatch from '@/components/NewMatch'
 import Rank from '@/components/Rank'
+import Home from '@/components/Home'
 
 
 Vue.use(Router);
@@ -26,6 +27,11 @@ export default new Router({
       path: '/Rank',
       name: 'Rank',
       component: Rank
+    },
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
     },
 
   ]

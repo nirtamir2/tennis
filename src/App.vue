@@ -43,9 +43,9 @@
         <v-toolbar-title>Tennis</v-toolbar-title>
       </v-toolbar>
       <main>
-        <v-container fluid>
+        <!--<v-container fluid>-->
           <router-view></router-view>
-        </v-container>
+        <!--</v-container>-->
       </main>
     </v-app>
   </div>
@@ -62,7 +62,7 @@
           {title: 'New Match', icon: 'add', router: 'NewMatch'},
           {title: 'New Player', icon: 'person_add', router: 'NewPlayer'},
           {title: 'Score', icon: 'view_day', router: 'Score'},
-          {title: 'Rank', icon: 'view_list', router:'Rank'}
+          {title: 'Rank', icon: 'view_list', router:'/'}
         ],
         mini: false,
         right: null

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <div class="ma-5">
     <v-text-field
       label="name"
       v-model.trim="name"
@@ -14,7 +14,7 @@
     <div>
       <v-btn @click.native="save">save</v-btn>
     </div>
-  </v-container>
+  </div>
 </template>
 <script>
   import {db} from '../firebase'

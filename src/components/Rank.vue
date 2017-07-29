@@ -1,42 +1,46 @@
 <template>
-  <v-card>
-    <v-card-title>
-      Rank
-      <v-spacer></v-spacer>
-      <v-text-field
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
-        v-model="search"
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      v-bind:headers="headers"
-      v-bind:items="this.getItems()"
-      v-bind:search="search"
-      hide-actions
-    >
-      <template slot="items" scope="props">
-        <td class="text-xs-left">{{ props.item.rank }}</td>
-        <td class="text-xs-right">{{props.item.player.name}}</td>
-        <td class="text-xs-right">{{ props.item.matches }}</td>
-        <td class="text-xs-right">{{ props.item.wins }}</td>
-        <td class="text-xs-right">{{ props.item.draws }}</td>
-        <td class="text-xs-right">{{ props.item.loses }}</td>
-        <td class="text-xs-right">{{ props.item.points }}</td>
-      </template>
-      <template slot="pageText" scope="{ pageStart, pageStop }">
-        From {{ pageStart }} to {{ pageStop }}
-      </template>
-    </v-data-table>
-  </v-card>
+  <div>
+    <v-card>
+      <v-card-title>
+        Rank
+        <v-spacer></v-spacer>
+        <v-text-field
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+          v-model="search"
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        v-bind:style="{'max-height': '60vh' ,'overflow':'auto'}"
+        v-bind:headers="headers"
+        v-bind:items="this.getItems()"
+        v-bind:search="search"
+        hide-actions
+      >
+        <template slot="items" scope="props">
+          <td class="text-xs-left">{{ props.item.rank }}</td>
+          <td class="text-xs-right">{{props.item.player.name}}</td>
+          <td class="text-xs-right">{{ props.item.matches }}</td>
+          <td class="text-xs-right">{{ props.item.wins }}</td>
+          <td class="text-xs-right">{{ props.item.draws }}</td>
+          <td class="text-xs-right">{{ props.item.loses }}</td>
+          <td class="text-xs-right">{{ props.item.points }}</td>
+        </template>
+        <template slot="pageText" scope="{ pageStart, pageStop }">
+          From {{ pageStart }} to {{ pageStop }}
+        </template>
+      </v-data-table>
+    </v-card>
+  </div>
 </template>
 
 <script>
   import {db} from './../firebase';
+
   export default {
-    data () {
+    data() {
       return {
         search: '',
         pagination: {},

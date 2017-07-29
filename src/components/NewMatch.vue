@@ -64,6 +64,17 @@
           </template>
         </v-select>
       </v-flex>
+      <v-btn
+        class="green elevation-10"
+        dark
+        button
+        right
+        fab
+        fixed
+        @click.native="moveToNewMPlayerScreen"
+      >
+        <v-icon>person_add</v-icon>
+      </v-btn>
       <v-flex xs12 sm6>
         <v-select
           label="team 2"
@@ -137,6 +148,9 @@
       };
     },
     methods: {
+      moveToNewMPlayerScreen(){
+        this.$router.push({path: 'newPlayer'})
+      },
       save(){
         if (this.selectedTeam1.length > 0 && this.selectedTeam1.length === this.selectedTeam2.length) {
 
