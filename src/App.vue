@@ -63,7 +63,8 @@
           {title: 'New Player', icon: 'person_add', router: 'NewPlayer'},
           {title: 'Score', icon: 'view_day', router: 'Score'},
           {title: 'Rank', icon: 'view_list', router:'/'},
-          {title: 'Signup', icon: 'signup', router:'/Signup'}
+          {title: 'Signup', icon: 'signup', router:'/Signup'},
+          {title: 'Signin', icon: 'signup', router:'/Signin'}
         ],
         mini: false,
         right: null

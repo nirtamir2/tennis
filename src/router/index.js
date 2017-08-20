@@ -6,6 +6,7 @@ import NewMatch from '@/components/NewMatch'
 import Rank from '@/components/Rank'
 import Home from '@/components/Home'
 import Signup from '@/components/Signup'
+import Signin from '@/components/Signin'
 
 
 Vue.use(Router);
@@ -38,6 +39,10 @@ export default new Router({
       path: '/Signup',
       name: 'Signup',
       component: Signup
+    },    {
+      path: '/Signin',
+      name: 'Signin',
+      component: Signin
     },
 
   ]
