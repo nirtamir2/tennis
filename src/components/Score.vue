@@ -2,7 +2,10 @@
   <div>
     <template v-for="match in this.matches">
       <div>
-        <v-layout row fluid>
+        <v-layout row fluid  @oncontextmenu v-touch="{
+      left: () => addElement(match),
+      right: () => openDialog()
+    }">
           <v-flex v-for="player in team1(match)">
             <team-player :player="player"></team-player>
           </v-flex>
@@ -11,6 +14,25 @@
             <team-player :player="player"></team-player>
           </v-flex>
         </v-layout>
+
+        <v-layout row justify-center style="position: relative;">
+          <v-dialog v-model="dialog" lazy absolute>
+            <v-card>
+              <v-card-title>
+                <div class="headline">removing match</div>
+              </v-card-title>
+              <v-card-text>do you want to remove match this match? {{match.team1Score}}:{{match.team2Score}}</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">No</v-btn>
+                <v-btn class="green--text darken-1" flat="flat" @click.native="removeElement(match)">Yes</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-layout>
+
+
+
       </div>
     </template>
   </div>
@@ -19,12 +41,16 @@
 <script>
   import {db} from './../firebase'
   import TeamPlayer from './TeamPlayer.vue'
+  import Service from './../services/addMatch'
   export default {
     name: 'score',
     components: {TeamPlayer},
 
     data () {
-      return {}
+      return {
+        dialog: false,
+        test: true
+      }
     },
     firebase: {
       matches: db.ref('matches'),
@@ -34,6 +60,17 @@
       }
     },
     methods: {
+      openDialog(){
+        this.dialog=true;
+      }
+      ,
+      addElement() {
+        console.log("add")
+      },
+      removeElement(match) {
+        Service.remove(match)
+        this.dialog=false
+      },
       team1(match){
         let keys = Object.keys(match.team1);
         let arr = [];

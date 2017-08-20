@@ -27,7 +27,7 @@
         <v-list class="pt-0" dense>
           <v-divider></v-divider>
           <router-link v-for="item in items"  :to="item.router" tag="div">
-          <v-list-tile :key="item">
+          <v-list-tile :key="item.router">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -39,7 +39,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-toolbar fixed class="green" dark>
-        <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>Tennis</v-toolbar-title>
       </v-toolbar>
       <main>

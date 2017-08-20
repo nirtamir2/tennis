@@ -42,22 +42,45 @@ let updateRanking = function (newMatch) {
       rank.matches++;
       updateRank(playerKey, rank);
     }
-  })
-};
-export default {
-
-  save(match) {
-    const team1 = getTeamIds(match.selectedTeam1);
-    const team2 = getTeamIds(match.selectedTeam2);
-
-    let newMatch = {
-      team1,
-      team2,
-      date: match.date,
-      team1Score: match.team1Score,
-      team2Score: match.team2Score
-    };
-    db.ref('matches').push(newMatch);
-    updateRanking(newMatch);
-  }
+  });
 }
+  let updateRevertRanking = function (newMatch) {
+    const {winning, losing} = getRankingTeams(newMatch)
+    db.ref('rank').once('value').then((snapshot) => {
+      let ranks = snapshot.val();
+      for (let playerKey of Object.keys(winning)) {
+        let rank = {...ranks[playerKey]};
+        rank.wins--;
+        rank.matches--;
+        rank.points--;
+        updateRank(playerKey, rank);
+      }
+      for (let playerKey of Object.keys(losing)) {
+        let rank = {...ranks[playerKey]};
+        rank.lose--;
+        rank.matches--;
+        updateRank(playerKey, rank);
+      }
+    })
+  }
+
+  export default {
+    save(match) {
+      const team1 = getTeamIds(match.selectedTeam1);
+      const team2 = getTeamIds(match.selectedTeam2);
+
+      let newMatch = {
+        team1,
+        team2,
+        date: match.date,
+        team1Score: match.team1Score,
+        team2Score: match.team2Score
+      };
+      db.ref('matches').push(newMatch);
+      updateRanking(newMatch);
+    },
+    remove(match) {
+      db.ref('matches').child(match[".key"]).remove();
+      updateRevertRanking(match);
+    }
+  }
