@@ -5,6 +5,7 @@ import NewPlayer from '@/components/NewPlayer'
 import NewMatch from '@/components/NewMatch'
 import Rank from '@/components/Rank'
 import Home from '@/components/Home'
+import Signup from '@/components/Signup'
 
 
 Vue.use(Router);
@@ -32,6 +33,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/Signup',
+      name: 'Signup',
+      component: Signup
     },
 
   ]

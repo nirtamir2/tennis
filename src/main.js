@@ -3,13 +3,13 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import Vuetiify from 'vuetify';
+import Vuetify from 'vuetify';
 import VueFire from 'vuefire';
 import './firebase';
 
 Vue.config.productionTip = false;
 
-Vue.use(Vuetiify);
+Vue.use(Vuetify);
 Vue.use(VueFire);
 
 
