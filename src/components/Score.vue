@@ -2,10 +2,7 @@
   <div>
     <template v-for="match in this.matches">
       <div>
-        <v-layout row fluid  @oncontextmenu = "openDialog()" v-touch="{
-      left: () => addElement(match),
-      right: () => openDialog(match)
-    }">
+        <v-layout row fluid @dblclick = openDialog(match)>
           <v-flex v-for="player in team1(match)">
             <team-player :player="player"></team-player>
           </v-flex>
@@ -62,9 +59,6 @@
         this.dialog=true;
       }
       ,
-      addElement() {
-        console.log("add")
-      },
       removeElement(match) {
         Service.remove(match)
         this.dialog=false
