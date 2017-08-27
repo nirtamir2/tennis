@@ -3,11 +3,11 @@
     <template v-for="match in this.matches">
       <div>
         <v-layout row fluid @dblclick = openDialog(match)>
-          <v-flex v-for="player in team1(match)">
+          <v-flex class="text-xs-center" v-for="player in team1(match)">
             <team-player :player="player"></team-player>
           </v-flex>
           <h4 class="text-xs-center">{{match.team1Score}}:{{match.team2Score}}</h4>
-          <v-flex v-for="player in team2(match)">
+          <v-flex  class="text-xs-center" v-for="player in team2(match)">
             <team-player :player="player"></team-player>
           </v-flex>
         </v-layout>

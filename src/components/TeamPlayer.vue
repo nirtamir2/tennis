@@ -1,11 +1,18 @@
 <template>
-  <v-avatar>
-    <img style="vertical-align:middle" :src="player.avatar" :alt="player.avatar">
-    <h4>{{player.name}}</h4>
-  </v-avatar>
+  <v-flex>
+    <img class="avatara" :src="player.avatar" :alt="player.avatar">
+    <p>{{player.name}}</p>
+  </v-flex>
 </template>
 <script>
-  export default{
+  export default {
     props: ['player']
   }
 </script>
+<style scoped>
+  .avatara {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+</style>
