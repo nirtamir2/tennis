@@ -22,8 +22,8 @@
           <v-card-text>do you want to remove match this match? {{match.team1Score}}:{{match.team2Score}}</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">No</v-btn>
-            <v-btn class="green--text darken-1" flat="flat" @click.native="removeElement(match)">Yes</v-btn>
+            <v-btn class="green--text darken-1" flat="flat" @click="dialog = false">No</v-btn>
+            <v-btn class="green--text darken-1" flat="flat" @click="removeElement(match)">Yes</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
